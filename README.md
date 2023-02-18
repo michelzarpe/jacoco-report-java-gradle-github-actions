@@ -1,1 +1,1 @@
-# build-java-with-gradle-github-actions
+# java-with-gradle
