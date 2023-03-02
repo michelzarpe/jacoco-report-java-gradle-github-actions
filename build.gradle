@@ -17,3 +17,4 @@ tasks.create(name: "testCoverage", type: JacocoReport, dependsOn: "test") {
         html.enabled = true
         xml.enabled = true
     }
+}
