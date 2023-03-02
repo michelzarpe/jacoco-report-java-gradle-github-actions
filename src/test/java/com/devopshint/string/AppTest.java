@@ -1,4 +1,4 @@
-package com.devopshint.StringPalindrome;
+package com.devopshint.string;
 
 import static org.junit.Assert.assertEquals;
 
