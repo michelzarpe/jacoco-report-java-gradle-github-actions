@@ -27,7 +27,9 @@ jobs:
         arguments: build
    
     - name: Run Coverage
-      run: ./gradlew testCoverage
+      run: |
+          chmod +x gradlew
+          ./gradlew testCoverage
 
     - name: Upload Report
       uses: 'actions/upload-artifact@v2'
