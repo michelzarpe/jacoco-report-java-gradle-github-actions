@@ -4,7 +4,7 @@ public class AppTest {
 
 	@Test
 	public void verifySomeRandomMethod() {
-		Example junitTest = new Example();
+		AppTest junitTest = new AppTest();
 		junitTest.someRandomMethod(11, 12);
 	}
 }
