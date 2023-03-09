@@ -3,9 +3,6 @@ apply plugin: "jacoco"
 
 
 
-sourceCompatibility = 18
-targetCompatibility = 18
-
 repositories {
     mavenCentral()
 }
