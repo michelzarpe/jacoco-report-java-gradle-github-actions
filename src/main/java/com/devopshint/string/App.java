@@ -1,4 +1,9 @@
 package com.devopshint.string;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 public class App {
 
 	public boolean isPalindrome(String input) {
