@@ -1,30 +1,13 @@
-package com.devopshint.string;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 public class App {
-
-	public boolean isPalindrome(String input) {
-
-		if (input == null) {
-			throw new IllegalArgumentException("input shouldn't be null");
-		}
-
-		if (input.equals(reverse(input))) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private String reverse(String input) {
-		String rev = "";
-		for (int i = input.length() - 1; i >= 0; i--) {
-			rev = rev + input.charAt(i);
-		}
-		return rev;
-	}
-
+	
+	 public long someRandomMethod(int a, int b) {
+	    	
+	    	if (a > 10 && b > 10){
+	    		return a+b;
+	    	}
+	    	else{
+	    		return a-b;
+	    	}
+	       
+	    }
 }
