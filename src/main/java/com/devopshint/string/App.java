@@ -1,3 +1,5 @@
+package com.devopshint.string;
+
 public class App {
 	
 	 public long someRandomMethod(int a, int b) {
