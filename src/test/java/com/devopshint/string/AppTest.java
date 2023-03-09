@@ -1,7 +1,5 @@
 package com.devopshint.string;
 
-import org.junit.Test;
-
 public class AppTest {
 
 	@Test
