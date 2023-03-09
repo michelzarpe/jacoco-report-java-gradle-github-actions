@@ -13,9 +13,7 @@ dependencies {
 
 jacocoTestReport {
     reports {
-        html.enabled = true
-        xml.enabled = true
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        csv.enabled true
     }
 }
 
