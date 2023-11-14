@@ -18,3 +18,4 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
