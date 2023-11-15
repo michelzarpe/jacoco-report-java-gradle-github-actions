@@ -16,6 +16,12 @@ jacocoTestReport {
         csv.enabled true
         xml.enabled true
     }
+    jacocoTestReport {
+        reports {
+            csv.enabled true
+            xml.enabled true
+        }
+    }
 }
 
 check.dependsOn jacocoTestReport
