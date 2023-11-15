@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   Jacoco:
-    runs-on: [self-hosted, Linux, X64, cybersecurity]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
