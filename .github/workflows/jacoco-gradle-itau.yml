@@ -1,57 +1,44 @@
-name: Jacoco Coverage
+name: Measure coverage
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
 
-permissions:
-  contents: read
-
 jobs:
-  Jacoco:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt'
-      - name: Run Coverage
-        run: |
-          chmod +x gradlew
-          ./gradlew clean build
-      - name: Add coverage to PR
-        id: jacoco
-        uses: madrapps/jacoco-report@v1.2
-        with:
-          paths: ${{ github.workspace }}/build/reports/jacoco/test/html/jacocoTestReport.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 5
-          min-coverage-changed-files: 100
+          distribution: 'temurin'
 
-      - run: echo "${{ steps.jacoco.outputs.coverage-overall }}"
-      - run: echo "${{ steps.jacoco.outputs.coverage-changed-files }}"
-      - name: Fail Overall Coverage
-        if: steps.jacoco.outputs.coverage-overall < 30
-        uses: actions/github-script@v5
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Coverage
+        run: ./gradlew testCoverage
+
+      - name: Upload Report
+        uses: 'actions/upload-artifact@v2'
         with:
-          script: |
-            core.setFailed('Overal Coverage less than required!')
-            github.rest.issues.createComment({
-                          issue_number: context.issue.number,
-                          owner: context.repo.owner,
-                          repo: context.repo.repo,
-                          body: '![](https://c.tenor.com/a8EScUYblYwAAAAd/scared-cat-alarmed.gif)\n\nFaltou teste nesse projeto ai'
-                        })
-      - name: Fail Changed Files Coverage
-        if: steps.jacoco.outputs.coverage-changed-files < 30
-        uses: actions/github-script@v5
+          name: report.xml
+          path: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
+
+      - name: Jacoco Report to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.1
         with:
-          script: |
-            core.setFailed('Changed Files Coverage less than required!')
-            github.rest.issues.createComment({
-                          issue_number: context.issue.number,
-                          owner: context.repo.owner,
-                          repo: context.repo.repo,
-                          body: '![](https://c.tenor.com/a8EScUYblYwAAAAd/scared-cat-alarmed.gif)\n\nFaltou teste nesses arquivos ai'
-                        })
+          path: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 40
+          min-coverage-changed-files: 60
+          debug-mode: false
+
+      - name: Get the Coverage info
+        run: |
+          echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
+          echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
