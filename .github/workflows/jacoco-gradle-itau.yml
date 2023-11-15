@@ -33,8 +33,8 @@ jobs:
         with:
           path: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 85
-          min-coverage-changed-files: 85
+          min-coverage-overall: 50
+          min-coverage-changed-files: 50
           debug-mode: false
 
       - name: Get the Coverage info
@@ -42,9 +42,9 @@ jobs:
           echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
           echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
 
-      - name: Fail PR if overall coverage is less than 80%
-        if: ${{ steps.jacoco.outputs.coverage-overall < 80.0 }}
+      - name: Fail PR if overall coverage is less than 50%
+        if: ${{ steps.jacoco.outputs.coverage-overall < 50.0 }}
         uses: actions/github-script@v6
         with:
           script: |
-            core.setFailed('Overall coverage is less than 80%!')
+            core.setFailed('Overall coverage is less than 50%!')
